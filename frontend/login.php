@@ -38,18 +38,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <title>Login</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kimeiga/bahunya/dist/bahunya.min.css">
 </head>
 <body>
     
     <h1>Login</h1>
     
     <?php if ($is_invalid): ?>
-        <em>Invalid login</em>
+        <em>Invalid login credentials, try again!</em>
     <?php endif; ?>
     
     <form method="post">
-        <label for="email">email</label>
+        <label for="email">E-mail</label>
         <input type="email" name="email" id="email"
                value="<?= htmlspecialchars($_POST["email"] ?? "") ?>">
         

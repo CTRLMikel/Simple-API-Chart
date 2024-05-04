@@ -1,4 +1,4 @@
-var labeltitle = [], labelcategory = [], labelauthor = [], labelid = [], labelbody = []
+var chartCountry = [], chartAlcohol = []
 
 async function dummyChart() {
   await getDummyData()
@@ -9,18 +9,18 @@ let chart = new Chart(ctx, {
     type: 'bar',
 
     data: {
-        labels: labelbody,
+        labels: chartCountry,
         datasets: [{
-            label: 'Title',
+            label: 'Country',
             backgroundColor: 'blue',
             borderColor: 'rgb(255, 99, 132)',
-            data: labeltitle
+            data: chartCountry
         },
         {
-          label: 'ID',
+          label: 'Alcohol Consumed',
           backgroundColor: 'pink',
           borderColor: 'rgb(255, 99, 132)',
-          data: labelid
+          data: chartAlcohol
       }
       ]
     },
@@ -43,15 +43,11 @@ async function getDummyData() {
   const response = await fetch(apiUrl)
   const barChatData = await response.json()
 
-  const title = barChatData.data.map((x) => x.title)
-  const category = barChatData.data.map((x) => x.category_name)
-  const author = barChatData.data.map((x) => x.author)
-  const id = barChatData.data.map((x) => x.id)
-  const body = barChatData.data.map((x) => x.body)
+  console.log(barChatData);
 
-  labeltitle = title
-  labelauthor = author
-  labelcategory = category
-  labelid = id
-  labelbody = body
+  const Country = barChatData.data.map((x) => x.Country)
+  const Alcohol = barChatData.data.map((x) => x.Alcohol)
+
+  chartCountry = Country
+  chartAlcohol = Alcohol
 }

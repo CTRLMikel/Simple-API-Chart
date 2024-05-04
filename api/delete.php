@@ -15,7 +15,7 @@
  //get raw posted data
  $data = json_decode(file_get_contents("php://input"));
 
- $post->id = $data->id;
+ $post->Country = $data->Country;
  
  //update post
  if($post->delete()){

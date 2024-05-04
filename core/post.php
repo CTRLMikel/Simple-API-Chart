@@ -3,11 +3,11 @@
 class Post{
     //db stuff
     private $conn;
-    private $table = 'posts';
+    private $table = 'alcohol';
 
     //post properties
-    public $id;
-    public $category_id;
+    public $Country;
+    public $Alcohol;
 
     //constructor with db connection
     public function __construct($db){
@@ -18,7 +18,7 @@ class Post{
         //create query
         $query = 'SELECT
             a.Country,
-            a.Alcohol,
+            a.Alcohol
             FROM
             ' .$this->table . ' a';
         //prepare statement
@@ -32,39 +32,37 @@ class Post{
      
      public function read_single(){
         $query = 'SELECT
-            c.name as category_name,
-            p.id,
-            p.category_id,
+            a.Country,
+            a.Alcohol,
             FROM
-            ' .$this->table . ' p';
+            ' .$this->table . ' a
+            LEFT JOIN 
+                 WHERE a.Country = ? LIMIT 1';
 
         //prepare statement
         $stmt = $this->conn->prepare($query);
         //binding param
-        $stmt->bindParam(1, $this->id);
+        $stmt->bindParam(1, $this->Country);
         //execute the query
         $stmt->execute();
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $this->title = $row['title'];
-        $this->body = $row['body'];          
+        $this->Country = $row['Country'];
+        $this->Alcohol = $row['Alcohol'];
+           
      }
     public function create(){
         //create query
-        $query = 'INSERT INTO ' . $this->table . ' SET title = :title, body = :body, author = :author, category_id = :category_id';
+        $query = 'INSERT INTO ' . $this->table . ' SET Country = :Country, Alcohol = :Alcohol';
         //prepare statement
         $stmt = $this->conn->prepare($query);
         //clean data
-        $this->title = htmlspecialchars(strip_tags($this->title));
-        $this->body = htmlspecialchars(strip_tags($this->body));
-        $this->author = htmlspecialchars(strip_tags($this->author));
-        $this->category_id = htmlspecialchars(strip_tags($this->category_id));
+        $this->Country = htmlspecialchars(strip_tags($this->Country));
+        $this->Alcohol = htmlspecialchars(strip_tags($this->Alcohol));
        //binding of parameters
-       $stmt->bindParam('title', $this->title);
-       $stmt->bindParam('body', $this->body);
-       $stmt->bindParam('author', $this->author);
-       $stmt->bindParam('category_id', $this->category_id);
+       $stmt->bindParam('Country', $this->Country);
+       $stmt->bindParam('Alcohol', $this->Alcohol);
        //execute the query
        if($stmt->execute()){
         return true;
@@ -77,22 +75,16 @@ class Post{
       //update post function
     public function update(){
         //create query
-        $query = 'UPDATE ' . $this->table . ' SET title = :title, body = :body, author = :author, category_id = :category_id
-        WHERE id = :id';
+        $query = 'UPDATE ' . $this->table . ' SET Country = :Country, Alcohol = :Alcohol
+        WHERE Country = :Country';
         //prepare statement
         $stmt = $this->conn->prepare($query);
         //clean data
-        $this->title = htmlspecialchars(strip_tags($this->title));
-        $this->body = htmlspecialchars(strip_tags($this->body));
-        $this->author = htmlspecialchars(strip_tags($this->author));
-        $this->category_id = htmlspecialchars(strip_tags($this->category_id));
-        $this->id = htmlspecialchars(strip_tags($this->id));
+        $this->Country = htmlspecialchars(strip_tags($this->Country));
+        $this->Alcohol = htmlspecialchars(strip_tags($this->Alcohol));
        //binding of parameters
-       $stmt->bindParam('title', $this->title);
-       $stmt->bindParam('body', $this->body);
-       $stmt->bindParam('author', $this->author);
-       $stmt->bindParam('category_id', $this->category_id);
-       $stmt->bindParam('id', $this->id);
+       $stmt->bindParam('Alcohol', $this->Alcohol);
+       $stmt->bindParam('Country', $this->Country);
        //execute the query
        if($stmt->execute()){
         return true;
@@ -105,13 +97,13 @@ class Post{
     //delete function
     public function delete(){
         //create query
-        $query = 'DELETE FROM ' . $this->table . ' WHERE id = :id';
+        $query = 'DELETE FROM ' . $this->table . ' WHERE Country = :Country';
         //prepare statement
         $stmt = $this->conn->prepare($query);
         //clean the data
-        $this->id = htmlspecialchars(strip_tags($this->id));
+        $this->Country = htmlspecialchars(strip_tags($this->Country));
         //binding the id parameter
-        $stmt->bindParam(':id', $this->id);
+        $stmt->bindParam(':Country', $this->Country);
          //execute the query
        if($stmt->execute()){
         return true;
