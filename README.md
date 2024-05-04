@@ -1,4 +1,4 @@
-## Simple-API-to-Chart
+## 🌐Simple-API-to-Chart
 ```PHP REST API Created by Mikel```
 
 - API Created with PHP
