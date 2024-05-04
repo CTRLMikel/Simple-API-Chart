@@ -8,3 +8,5 @@
 - Authentication implemented using PHP and 10.4.32-MariaDB
 - API responses with JSON formatted data from our database
 - Chart retrieves data from our API in JSON format and shows it accordingly
+- Avoiding mySQL injections by using mySQLI prepared statements
+- All API functions tested functional via Postman API

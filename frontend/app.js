@@ -6,7 +6,7 @@ async function dummyChart() {
 let ctx = document.getElementById('myChart').getContext('2d');
 
 let chart = new Chart(ctx, {
-    type: 'bar',
+    type: 'line',
 
     data: {
         labels: chartCountry,
@@ -28,7 +28,7 @@ let chart = new Chart(ctx, {
     options: {
       tooltips: {
         mode: 'index'
-      }
+      } 
     }
 });
 }
