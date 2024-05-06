@@ -16,3 +16,5 @@
 - Error handling on everything the program offers for better UX
 - Account Settings with options like: Change username, Change Password and Delete Account
 - Supported by every device
+
+ <!-- TODO: Fix Change Password -->
