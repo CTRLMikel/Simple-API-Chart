@@ -15,15 +15,17 @@ if (isset($_SESSION["user_id"])) {
 }
 
 ?>
+
 <!DOCTYPE html>
 <html data-bs-theme="dark">
 <head>
-    <title>Home</title>
+    <title>About</title>
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
 
+    
     <!-- Navigation  -->
         <div class="card text-center m-5">
         <div class="card-header">
@@ -32,7 +34,7 @@ if (isset($_SESSION["user_id"])) {
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="index.php">Home</a>
@@ -59,14 +61,7 @@ if (isset($_SESSION["user_id"])) {
         </div>
         </nav>
     <!-- Navigation -->
-    <div class="card text-center m-5">
-    <div class="card-header">
-    
-    <h2>Alcohol Chart per Country</h2>
-    </div>
-    <canvas id="myChart" ></canvas>
-    </div>
-    
+
     <?php if (isset($user)): ?>
         
         <p style="margin-top: 22px; margin-right: 130px;position:absolute;top:0;right:0;">Welcome to our dashboard, <?= htmlspecialchars($user["name"]) ?>!</p>
@@ -79,8 +74,11 @@ if (isset($_SESSION["user_id"])) {
         
     <?php endif; ?>
 
+    <div class="card text-center m-5">
+    <div class="card-header">
+
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered text-center">
             <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Warning!</h1>
@@ -96,6 +94,8 @@ if (isset($_SESSION["user_id"])) {
             </div>
         </div>
     </div>
+
+    <h1 class="pt-5">About us</h1>
 
     <script>
         document.getElementById("deleteButton").addEventListener("click", function() {
@@ -121,9 +121,10 @@ if (isset($_SESSION["user_id"])) {
         }
     });
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        
+    <pre class="pt-5">Student ID: 100675715
+Email: 100675715@unimail.derby.ac.uk</pre>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="app.js"></script>
 </body>
 </html>

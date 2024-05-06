@@ -18,7 +18,7 @@ let chart = new Chart(ctx, {
         },
         {
           label: 'Alcohol Consumed',
-          backgroundColor: 'white',
+          backgroundColor: 'rgb(255, 84, 71)',
           borderColor: 'rgb(255, 255, 255)',
           data: chartAlcohol
       }
@@ -49,3 +49,25 @@ async function getDummyData() {
   chartCountry = Country
   chartAlcohol = Alcohol
 }
+
+
+document.getElementById("deleteButton").addEventListener("click", function() {
+        window.location.href = "delete-account.php";
+});
+
+document.getElementById("changeUsername").addEventListener("click", function() {
+var newUsername = prompt("Enter new username:");
+
+if (newUsername !== null && newUsername !== "") {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "change-username.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // Handle response, if needed
+            location.reload(); // Refresh the page after username change
+        }
+    };
+    xhr.send("new_username=" + encodeURIComponent(newUsername));
+}
+});

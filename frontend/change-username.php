@@ -5,18 +5,18 @@ if (isset($_SESSION["user_id"])) {
     $mysqli = require __DIR__ . "/database.php";
 
     $user_id = $_SESSION["user_id"];
+    $new_username = $_POST["new_username"];
 
-    $sql = "DELETE FROM user WHERE id = $user_id";
+    $sql = "UPDATE user SET name = '$new_username' WHERE id = $user_id";
     $result = $mysqli->query($sql);
 
     if ($result) {
-        // User deleted successfully, log out the user
-        session_unset();
-        session_destroy();
-        header("Location: account-deleted.html"); // Redirect to login page after deletion
+        // Username changed successfully
+        $_SESSION["name"] = $new_username; // Update session with new username
+        header("Location: index.php"); // Redirect to dashboard or profile page
         exit();
     } else {
-        // Error occurred while deleting user
+        // Error handling
         echo "Error: " . $mysqli->error;
     }
 } else {
@@ -27,6 +27,7 @@ if (isset($_SESSION["user_id"])) {
     echo "  window.location.href = 'login.php';";
     echo "}, 2000);"; // Delay of 2 seconds (2000 milliseconds)
     echo "</script>";
+    exit();
     exit();
 }
 ?>

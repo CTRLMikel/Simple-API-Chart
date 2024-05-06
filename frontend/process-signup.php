@@ -55,11 +55,3 @@ if ($stmt->execute()) {
         die($mysqli->error . " " . $mysqli->errno);
     }
 }
-
-
-
-
-
-
-
-
