@@ -16,6 +16,7 @@
 - Error handling on everything the program offers for better UX
 - Account Settings with options like: Change username, Change Password and Delete Account
 - Supported by every device
-- API Offers: create, delete, read_single, read and update functions
+- Our API Offers: create, delete, read_single, read and update functions
+- Live website hosted - https://sdjaiuheqwp.000webhostapp.com/frontend/index.php
 
  <!-- // TODO: Fix Change Password -->
