@@ -25,6 +25,7 @@ if (isset($_SESSION["user_id"])) {
 <body>
 
     <!-- Navigation  -->
+    
         <div class="card text-center m-5">
         <div class="card-header">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -58,7 +59,9 @@ if (isset($_SESSION["user_id"])) {
             </div>
         </div>
         </nav>
-    <!-- Navigation -->
+
+    <!-- Chart -->
+
     <div class="card text-center m-5">
     <div class="card-header">
     
@@ -66,6 +69,8 @@ if (isset($_SESSION["user_id"])) {
     </div>
     <canvas id="myChart" ></canvas>
     </div>
+
+    <!-- Log in / Out Handling -->
     
     <?php if (isset($user)): ?>
         
@@ -78,6 +83,8 @@ if (isset($_SESSION["user_id"])) {
         <p style="margin-top: 20px; margin-right: 30px;position:absolute;top:0;right:0;"><a class="btn btn-outline-primary btn-sm" href="login.php">Log in</a> or <a class="btn btn-outline-primary btn-sm" href="signup.html">Sign up</a></p>
         
     <?php endif; ?>
+
+    <!-- Delete account Modal -->
 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -97,11 +104,15 @@ if (isset($_SESSION["user_id"])) {
         </div>
     </div>
 
+    <!-- Delete user account -->
+
     <script>
         document.getElementById("deleteButton").addEventListener("click", function() {
-                window.location.href = "delete-account.php";
+                window.location.href = "delete-account.php"; // Redirects the user to the delete-account.php script which deletes the user from our database
         });
     </script>
+
+    <!-- Username Change -->
 
     <script>
     document.getElementById("changeUsername").addEventListener("click", function() {

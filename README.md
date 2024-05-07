@@ -1,3 +1,8 @@
+
+# Project Title
+
+A brief description of what this project does and who it's for
+
 ## 🌐Simple-API-to-Chart
 ```PHP REST API Created by Mikel```
 
@@ -16,7 +21,45 @@
 - Error handling on everything the program offers for better UX
 - Account Settings with options like: Change username, Change Password and Delete Account
 - Supported by every device
-- Our API Offers: create, delete, read_single, read and update functions
-- Live website hosted - https://sdjaiuheqwp.000webhostapp.com/frontend/index.php
+- Our API Offers: create, delete, read_single, read and update functions (These functions are tested via Postman API)
+- Live website hosted - https://sdjaiuheqwp.000webhostapp.com/frontend/
+## ⚙️Run Locally
 
- <!-- // TODO: Fix Change Password -->
+Clone the project
+
+```bash
+  git clone https://github.com/CTRLMikel/Simple-API-Chart.git
+```
+
+Go to the project directory
+
+```bash
+  cd Simple-API-Chart-main (or as you named the folder)
+```
+
+Install dependencies
+
+```
+  XAMPP
+```
+
+Start the server
+
+```
+  Start Apache & MySQL inside XAMPP
+```
+Install Databases
+```
+  Go inside database_files and IMPORT the SQL files inside the /localhost/phpmyadmin database
+```
+
+Go to the following URL inside your browser
+
+```
+  /localhost/Simple-API-Chart/frontend
+```
+
+
+
+## 🔗 Links
+[![website](https://i.postimg.cc/151RDPXr/New-Project-1.png)](https://sdjaiuheqwp.000webhostapp.com/frontend)

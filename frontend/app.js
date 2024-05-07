@@ -1,7 +1,7 @@
 var chartCountry = [], chartAlcohol = []
 
-async function dummyChart() {
-  await getDummyData()
+async function alcoholChart() {
+  await getData()
 
 let ctx = document.getElementById('myChart').getContext('2d');
 
@@ -33,12 +33,12 @@ let chart = new Chart(ctx, {
 });
 }
 
-dummyChart()
+alcoholChart()
 
 //Fetch Data from API
 
-async function getDummyData() {
-  const apiUrl = "http://localhost/phprest/api/read.php"
+async function getData() {
+  const apiUrl = "http://localhost/phprest/api/read.php" // In this case using localhost API
 
   const response = await fetch(apiUrl)
   const barChatData = await response.json()
@@ -49,25 +49,3 @@ async function getDummyData() {
   chartCountry = Country
   chartAlcohol = Alcohol
 }
-
-
-document.getElementById("deleteButton").addEventListener("click", function() {
-        window.location.href = "delete-account.php";
-});
-
-document.getElementById("changeUsername").addEventListener("click", function() {
-var newUsername = prompt("Enter new username:");
-
-if (newUsername !== null && newUsername !== "") {
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "change-username.php", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            // Handle response, if needed
-            location.reload(); // Refresh the page after username change
-        }
-    };
-    xhr.send("new_username=" + encodeURIComponent(newUsername));
-}
-});
