@@ -32,7 +32,7 @@ if ($mysqli->affected_rows) {
     <h1>Chart Test Website</h1>
     <pre>We heard that you lost your GitHub password. Sorry about that!
     But don’t worry!</pre>
-    Click <a href="http://localhost/phprest/frontend/reset-password.php?token=$token">here</a>
+    Click <a href="http://localhost/API-Chart/frontend/reset-password.php?token=$token">here</a>
     to reset your password!
 
     END;

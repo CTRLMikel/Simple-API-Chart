@@ -1,9 +1,4 @@
-
-# Project Title
-
-A brief description of what this project does and who it's for
-
-## 🌐Simple-API-to-Chart
+# 🌐Simple-API-to-Chart
 ```PHP REST API Created by Mikel```
 
 - REST API Created with PHP
