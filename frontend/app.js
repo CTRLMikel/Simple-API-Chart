@@ -10,12 +10,12 @@ let chart = new Chart(ctx, {
 
     data: {
         labels: chartCountry,
-        datasets: [{
-            label: 'Country',
-            backgroundColor: 'blue',
-            borderColor: 'rgb(255, 255, 255)',
-            data: chartCountry
-        },
+        datasets: [//{
+        //     label: 'Country',
+        //     backgroundColor: 'blue',
+        //     borderColor: 'rgb(255, 255, 255)',
+        //     data: chartCountry
+        // },
         {
           label: 'Alcohol Consumed',
           backgroundColor: 'rgb(255, 84, 71)',
@@ -38,7 +38,7 @@ alcoholChart()
 //Fetch Data from API
 
 async function getData() {
-  const apiUrl = "http://localhost/API-Chart/api/read.php" // In this case using localhost API
+  const apiUrl = "http://localhost/API-Chart/api/read.php" // In this case using localhost API (if hosted change to your domain url)
 
   const response = await fetch(apiUrl)
   const barChatData = await response.json()

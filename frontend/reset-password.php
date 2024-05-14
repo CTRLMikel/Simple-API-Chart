@@ -33,13 +33,13 @@ if (strtotime($user["reset_token_expires_at"]) <= time()) {
 <head>
     <title>Reset Password</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kimeiga/bahunya/dist/bahunya.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>Reset Password</h1>
-
     <form method="post" action="process-reset-password.php">
+
+        <h1>Reset Password</h1>
 
         <input type="hidden" name="token" value="<?= htmlspecialchars($token) ?>">
 

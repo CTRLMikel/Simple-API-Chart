@@ -41,7 +41,7 @@ Install dependencies
 Start the server
 
 ```
-  Start Apache & MySQL inside XAMPP
+  Start Apache & MySQL services inside XAMPP
 ```
 Install Databases
 ```

@@ -38,28 +38,31 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <title>Login</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kimeiga/bahunya/dist/bahunya.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     
-    <h1>Login</h1>
-    
     <?php if ($is_invalid): ?>
-        <em>Invalid login credentials, try again!</em>
+        <em>Invalid login credentials, try again!</em>  
     <?php endif; ?>
-    
-    <form method="post">
-        <label for="email">E-mail</label>
-        <input type="email" name="email" id="email"
-               value="<?= htmlspecialchars($_POST["email"] ?? "") ?>">
         
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password">
-        
-        <button>Log in</button>
-    </form>
-
-    <a href="forgot-password.php">Forgot your password?</a>
+        <form method="post">
+            <h1>Login</h1>
+            <label for="email">E-mail</label>
+            <input type="email" name="email" id="email"
+                value="<?= htmlspecialchars($_POST["email"] ?? "") ?>">
+            
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password">
+            
+            <button>Log in</button>
+            <div style="padding-top:20px; text-align:center;">
+                <a href="forgot-password.php">Forgot password?</a>
+            </div>
+            <div style="padding-top:20px; text-align:center;">
+                <a href="signup.html">Don't have an account?</a>
+            </div>
+        </form>
     
 </body>
 </html>

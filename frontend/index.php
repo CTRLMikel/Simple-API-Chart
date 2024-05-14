@@ -21,11 +21,11 @@ if (isset($_SESSION["user_id"])) {
     <title>Home</title>
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
 </head>
 <body>
 
     <!-- Navigation  -->
-    
         <div class="card text-center m-5">
         <div class="card-header">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -39,22 +39,30 @@ if (isset($_SESSION["user_id"])) {
                 <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="about.php">About</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="contact.php">Contact</a>
+                <a class="nav-link" data-bs-toggle="modal" data-bs-target="#about" role="button">About</a>
                 </li>
                 <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Account
                 </a>
                 <ul class="dropdown-menu">
-                    <a class="dropdown-item" href="#" id="changeUsername">Change Username</a>
-                    <li><a class="dropdown-item" href="forgot-password.php">Change password</a></li>
+                    <?php if (isset($user)): ?>
+                        <a class="dropdown-item" id="changeUsername" role="button">Change Username</a>
+                    <?php else: ?>
+                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal" role="button">Change Username</a>
+                    <?php endif; ?>
+                    <?php if (isset($user)): ?>
+                        <li><a class="dropdown-item" href="forgot-password.php" role="button">Change password</a></li>
+                    <?php else: ?>
+                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal" role="button">Change password</a></li>
+                    <?php endif; ?>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item cursor-pointer pe-auto" data-bs-toggle="modal" data-bs-target="#exampleModal" role="button">Delete account</a></li>
+                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#accountModal" role="button">My Profile</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal" role="button">Delete account</a></li>
                 </ul>
                 </li>
+                <button class="btn btn-dark" onclick="toggleTheme()">Toggle Theme</button>
             </ul>
             </div>
         </div>
@@ -64,17 +72,31 @@ if (isset($_SESSION["user_id"])) {
 
     <div class="card text-center m-5">
     <div class="card-header">
-    
-    <h2>Alcohol Chart per Country</h2>
+
+    <div style="text-align:right;" class="dropdown">
+        <?php if (isset($user)): ?>
+            <a class="btn btn-success btn-sm" href="#user-chart">+ Add your chart</a>
+        <?php else: ?>
+            <button class="btn btn-secondary btn-sm" disabled>Log in to add Chart</button>
+        <?php endif; ?>
+
+        <?php if (isset($user)): ?>
+        <button id="addDataButton" class="btn btn-primary btn-sm">Add Data</button>
+        <?php else: ?>
+            <button class="btn btn-secondary btn-sm" disabled>Log in to Add Data</button>
+        <?php endif; ?>
     </div>
-    <canvas id="myChart" ></canvas>
+    
+    <h2 style="font-size:20px;">Alcohol Chart per Country</h2>
+    </div>
+        <canvas id="myChart"></canvas>
     </div>
 
     <!-- Log in / Out Handling -->
     
     <?php if (isset($user)): ?>
         
-        <p style="margin-top: 22px; margin-right: 130px;position:absolute;top:0;right:0;">Welcome to our dashboard, <?= htmlspecialchars($user["name"]) ?>!</p>
+        <p style="margin-top: 24px; margin-right: 130px;position:absolute;top:0;right:0;">Welcome to our dashboard, <?= htmlspecialchars($user["name"]) ?>!</p>
         
         <p style="margin-top: 17px; margin-right: 30px;position:absolute;top:0;right:0;"><a href="logout.php" class="btn btn-outline-danger">Log out</a></p>
         
@@ -84,9 +106,41 @@ if (isset($_SESSION["user_id"])) {
         
     <?php endif; ?>
 
+    <div id="user-chart" class="card text-center m-5">
+    <div class="card-header">
+    <h2>User Generated Chart</h2>
+    <?php if (isset($user)): ?>
+        <input class="form-control form-control-sm" type="file" id="upload-csv" accept=".csv" style="width: 300px; text-align:center; display: inline-block;">
+    <?php else: ?>
+        <input class="form-control form-control-sm" type="file" style="width: 300px; text-align:center; display: inline-block;" disabled>
+    <?php endif; ?>
+    <div id="main" style="padding-top:100px; width: 1800px;height:800px;"></div>
+
+    <!-- About Modal -->
+
+    <div class="modal fade" id="about" tabindex="-1" aria-labelledby="aboutModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="aboutModalLabel">About me</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Student ID: 100675715 <br>
+                College Email: 100675715@unimail.derby.uk.ac
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- Delete account Modal -->
 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <?php if (isset($user)): ?>
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
@@ -99,6 +153,41 @@ if (isset($_SESSION["user_id"])) {
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-danger" id="deleteButton">Delete</button>
+            </div>
+            </div>
+        </div>
+    <?php else: ?>
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Warning!</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                You need an account to do that
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Okay</button>
+            </div>
+            </div>
+    <?php endif; ?>
+    </div>
+
+    <!-- Account Modal -->
+
+    <div class="modal fade" id="accountModal" tabindex="-1" aria-labelledby="accountModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="accountModalLabel">My Profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Your Username: <?= htmlspecialchars($user["name"]) ?></p>
+                <p>Your Email: <?= isset($user["email"]) ? htmlspecialchars($user["email"]) : "" ?></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
             </div>
         </div>
@@ -133,8 +222,57 @@ if (isset($_SESSION["user_id"])) {
     });
     </script>
 
+    <script>
+        function toggleTheme() {
+            var htmlElement = document.querySelector("html");
+            var currentTheme = htmlElement.getAttribute("data-bs-theme");
+
+            // Toggle between "dark" and "light" themes
+            var newTheme = (currentTheme === "dark") ? "light" : "dark";
+            
+            // Update the data-bs-theme attribute
+            htmlElement.setAttribute("data-bs-theme", newTheme);
+        }
+    </script>
+
+    <script>
+        document.getElementById("addDataButton").addEventListener("click", function() {
+        // Call a function to add data to the database
+        addDataToDatabase();
+
+        async function addDataToDatabase() {
+
+        const newCountry = prompt("Enter the country:");
+        const newAlcohol = parseFloat(prompt("Enter the alcohol consumption:"));
+
+        if (newCountry && newAlcohol) {
+            const apiUrl = "http://localhost/API-Chart/api/create.php"; // URL to API endpoint for adding data
+            const data = { Country: newCountry, Alcohol: newAlcohol };
+
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                // If data added successfully, reload the chart with updated data
+                await getData();
+                alcoholChart();
+            } else {
+                alert("Failed to add data. Please try again.");
+            }
+        }
+    }
+
+    });
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>    
     <script src="app.js"></script>
+    <script src="userchart.js"></script>
 </body>
 </html>
