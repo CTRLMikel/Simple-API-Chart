@@ -7,9 +7,8 @@
 
 
     //load the config file first
-    require_once(INC_PATH.DS."config.php");
+    require_once("../includes/config.php");
 
     //core classes
-    require_once(CORE_PATH.DS."post.php");
-
+    require_once("../core/post.php");
 ?>

@@ -126,8 +126,9 @@ if (isset($_SESSION["user_id"])) {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Student ID: 100675715 <br>
-                College Email: 100675715@unimail.derby.uk.ac
+                My Student ID: 100675715 <br>
+                My College Email: 100675715@unimail.derby.uk.ac <br>
+                This is a test website made for a college assignment
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -244,9 +245,8 @@ if (isset($_SESSION["user_id"])) {
 
         const newCountry = prompt("Enter the country:");
         const newAlcohol = parseFloat(prompt("Enter the alcohol consumption:"));
-
-        if (newCountry && newAlcohol) {
-            const apiUrl = "http://localhost/API-Chart/api/create.php"; // URL to API endpoint for adding data
+        if (newCountry === '' || isNaN(newAlcohol)) {alert("No value"); return}
+            const apiUrl = "../api/create.php"; // URL to API endpoint for adding data
             const data = { Country: newCountry, Alcohol: newAlcohol };
 
             const response = await fetch(apiUrl, {
@@ -264,7 +264,7 @@ if (isset($_SESSION["user_id"])) {
             } else {
                 alert("Failed to add data. Please try again.");
             }
-        }
+        
     }
 
     });

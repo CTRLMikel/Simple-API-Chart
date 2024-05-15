@@ -38,7 +38,7 @@ alcoholChart()
 //Fetch Data from API
 
 async function getData() {
-  const apiUrl = "http://localhost/API-Chart/api/read.php" // In this case using localhost API (if hosted change to your domain url)
+  const apiUrl = "../api/read.php" // In this case using localhost API (if hosted change to your domain url)
 
   const response = await fetch(apiUrl)
   const barChatData = await response.json()

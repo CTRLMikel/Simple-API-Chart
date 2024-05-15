@@ -15,7 +15,7 @@ class Post{
             a.Country,
             a.Alcohol
             FROM
-            ' .$this->table . ' a';
+            ' .$this->table . ' a ORDER BY a.Alcohol DESC';
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
 
