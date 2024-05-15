@@ -48,18 +48,18 @@ if (isset($_SESSION["user_id"])) {
                 <ul class="dropdown-menu">
                     <?php if (isset($user)): ?>
                         <a class="dropdown-item" id="changeUsername" role="button">Change Username</a>
+                        <li><a class="dropdown-item" href="forgot-password.php" role="button">Change password</a></li>
+                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#accountModal" role="button">My Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal" role="button">Delete account</a></li>
                     <?php else: ?>
                         <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal" role="button">Change Username</a>
-                    <?php endif; ?>
-                    <?php if (isset($user)): ?>
-                        <li><a class="dropdown-item" href="forgot-password.php" role="button">Change password</a></li>
-                    <?php else: ?>
                         <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal" role="button">Change password</a></li>
+                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal" role="button">My Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal" role="button">Delete account</a></li>
                     <?php endif; ?>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#accountModal" role="button">My Profile</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal" role="button">Delete account</a></li>
+
                 </ul>
                 </li>
                 <button class="btn btn-dark" onclick="toggleTheme()">Toggle Theme</button>
