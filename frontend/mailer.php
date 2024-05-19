@@ -18,7 +18,7 @@ $mail->Host = "smtp.gmail.com";
 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 $mail->Port = 587;
 $mail->Username = "udomikeltestemail@gmail.com"; // Mock account
-$mail->Password = "atftmsqbwglzrmyw"; //This password will be later deleted
+$mail->Password = "atftmsqbwglzrmyw"; // This password would be inside an enviroment folder in real world scenarios 
 
 $mail->isHtml(true);
 
